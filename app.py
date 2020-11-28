@@ -24,7 +24,7 @@ bot = commands.Bot(command_prefix=prefix, case_insensitive=True, description="We
 @bot.event
 async def on_ready():
 	print("Le bot a démarré.")
-	await bot.change_presence(status=discord.Status.dnd, activity=discord.Game(name="say hello to Mme. Astie"))
+	await bot.change_presence(status=discord.Status.dnd, activity=discord.Game(name="say hello"))
 
 #La commande de test
 @bot.command()
@@ -696,7 +696,7 @@ async def on_message(message):
 			#''' Python Dictionnaires '''
 			elif message.content == "dictionnaires":
 				await message.channel.send("https://python.sdv.univ-paris-diderot.fr/13_dictionnaires_tuples_sets/")
-			#''' NSFW '''
+			#''' NSFW made for fun'''
 			elif message.content == "porn":
 				import pornhub
 
@@ -734,4 +734,4 @@ async def on_message(message):
 		pass
 
 	await bot.process_commands(message)
-bot.run('Nzc2ODEyMjY2MDQ4NzE2ODA0.X66UzA.i5cPLzn6nFTuBRs-skpM2PakW-4')
+bot.run('INSERT YOUR BOT TOKEN HERE')
