@@ -308,7 +308,7 @@ class Modération(commands.Cog):
 		if arg.isdigit() == False:
 			await ctx.send("**" + str(arg) + "** n'est pas un nombre valide. Veuillez spécifier un nombre de messages à supprimer.")
 		else:
-			await ctx.send('Clear started. It can have some delays between clears.')
+			await ctx.send('Clear started. There can be some delays between clears.')
 			await asyncio.sleep(1.5)
 			async for msg in ctx.channel.history(limit=int(arg)+2):
 				await msg.delete()
@@ -338,6 +338,7 @@ class Modération(commands.Cog):
 		await existing_channel.delete()
 
 		await ctx.send("Le channel #"+str(existing_channel)+" vient d'être supprimé")
+
 
 	@commands.command(brief="Créer un rôle avec le nom et les permissions donnés", aliases=['cr', 'rolecreate'])
 	@commands.guild_only()
@@ -381,8 +382,22 @@ class Modération(commands.Cog):
 	@commands.command(brief="Supprime le rôle indiqué")
 	@commands.guild_only()
 	async def deleteRole(self, ctx, arg : discord.Role):
-		await ctx.guild.delete_role(name=arg)
-		await ctx.send("Le rôle "+str(arg)+" a bien été supprimé")
+		await arg.delete()
+		await ctx.send("Le rôle `"+str(arg)+"` a bien été supprimé")
+
+
+	@commands.command(brief="Donne le rôle indiqué")
+	@commands.guild_only()
+	async def getRole(self, ctx, arg : discord.Role):
+		await ctx.message.author.add_roles(arg)
+		await ctx.send("Le rôle `"+str(arg)+"` t'a bien été ajouté")
+
+	@commands.command(brief="Enleve le rôle indiqué")
+	@commands.guild_only()
+	async def removeRole(self, ctx, arg : discord.Role):
+		await ctx.message.author.remove_roles(arg)
+		await ctx.send("Le rôle `"+str(arg)+"` t'a bien été retiré")
+
 
 class ModificationImages(commands.Cog):
 	@commands.command(brief="Ajoute un petit copyright sur vos images !", description="Attention, la transparence n'est pas prise en charge !", aliases=['©'])
@@ -734,4 +749,6 @@ async def on_message(message):
 		pass
 
 	await bot.process_commands(message)
+
+
 bot.run('INSERT YOUR BOT TOKEN HERE')
